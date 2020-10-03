@@ -30,10 +30,14 @@ namespace suitespk.webservices
             string connectionCS = ConfigurationManager.ConnectionStrings["student_data"].ConnectionString;
             using (SqlConnection objconn = new SqlConnection(connectionCS))
             {
+                objconn.Close();
                 objconn.Open();
                 SqlCommand cmd3 = new SqlCommand("DELETE FROM subjects WHERE subjects_id = '" + ObjDelStdInfo.std_id + "'", objconn);
                 cmd3.ExecuteNonQuery();
-                objconn.Close(); cmd3 = new SqlCommand("DELETE FROM marks WHERE subjects_id = '" + ObjDelStdInfo.std_id + "'", objconn);
+               
+                objconn.Close();
+                objconn.Open(); 
+                cmd3 = new SqlCommand("DELETE FROM marks WHERE subjects_id = '" + ObjDelStdInfo.std_id + "'", objconn);
                 cmd3.ExecuteNonQuery();
                 objconn.Close();
 
